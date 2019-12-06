@@ -48,16 +48,19 @@ function Carousel() {
   img3.src = "./assets/carousel/trees.jpeg";
   img4.src = "./assets/carousel/turntable.jpeg";
 
-  function setImg(num) {
+  left.textContent = "<";
+  right.textContent = ">";
+
+  function setImg(num, slide) {
     const list = document.querySelectorAll(".carousel-img");
     list.forEach(img => {
-      img.classList.remove("currentImg");
+      img.classList.remove("currentImg", slide);
     });
 
-    num === 1 && img1.classList.add("currentImg");
-    num === 2 && img2.classList.add("currentImg");
-    num === 3 && img3.classList.add("currentImg");
-    num === 4 && img4.classList.add("currentImg");
+    num === 1 && img1.classList.add("currentImg", slide);
+    num === 2 && img2.classList.add("currentImg", slide);
+    num === 3 && img3.classList.add("currentImg", slide);
+    num === 4 && img4.classList.add("currentImg", slide);
   }
 
   right.addEventListener("click", event => {
@@ -67,7 +70,7 @@ function Carousel() {
       imgNum = 1;
     }
     console.log("imgNum:", imgNum);
-    setImg(imgNum);
+    setImg(imgNum, "slideRight");
   });
 
   left.addEventListener("click", event => {
@@ -77,7 +80,7 @@ function Carousel() {
       imgNum = 4;
     }
     console.log("imgNum:", imgNum);
-    setImg(imgNum);
+    setImg(imgNum, "slideLeft");
   });
 
   carousel.append(left, img1, img2, img3, img4, right);

@@ -13,6 +13,28 @@ function Tab(content) {
   tab.classList.add("tab");
   tab.textContent = content;
 
+  tab.addEventListener("click", event => {
+    const cardList = document.querySelectorAll(".card");
+    cardList.forEach(card => {
+      if (content.indexOf(card.dataset.topic) === -1) {
+        card.style.display = "none";
+        console.log(card);
+      }
+    });
+  });
+
+  return tab;
+}
+
+function RefreshTab(bool) {
+  const tab = document.createElement("div");
+  tab.classList.add("tab");
+  tab.textContent = "REFRESH";
+
+  tab.addEventListener("click", event => {
+    getCards(bool);
+  });
+
   return tab;
 }
 
@@ -26,3 +48,5 @@ axios
       document.querySelector(".topics").appendChild(Tab(tab));
     });
   });
+
+document.querySelector(".topics").appendChild(RefreshTab(true));
